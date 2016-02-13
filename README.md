@@ -28,15 +28,25 @@ Usage:
  datint [options] file
 
 Options:
+
  -h            print this menu
+
  -s            seed for random number gen. (default is 0)
+
  -m            random LBA (default is serialized)
+
  -r            read-only (default is read/write)
+
  -w            write-only (default is read/write)
+
  -x            random w/r (default is read/write)
+
  -b <number>   beginnig LBA (default is 0)
+
  -e <number>   bounding LBA (default is file size)
+
  -i <number>   number of test iterations (default is 1)
+
  -z <number>   i/o block size (multiple of default 512)
 
 Example uses:
