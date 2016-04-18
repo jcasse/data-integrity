@@ -1,29 +1,34 @@
-DIR     = .
-TARGET  = "${DIR}/datint"
+PROJECT     := $(shell basename $(CURDIR))
+SRCDIR      := src
+BUILDDIR    := build
+TARGET      := bin/$(PROJECT)
+INFO        := $(PROJECT)
 
-CC     ?= gcc
-WFLAGS  = -W -Wall -Wextra -Werror
-LFLAGS  =
-CFLAGS  = -c -O2 -ansi $(WFLAGS)
-LIBS	=
+SOURCES     := $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.cpp=.o))
 
-HDRS := $(wildcard *.h)
-SRCS := $(wildcard *.c)
-OBJS = $(SRCS:.c=.o)
+CC          := g++
+CFLAGS      := -std=gnu++11 -Wall
 
-.PHONY: clean build rebuild
+LIB         :=
+INC         := -I include
 
-all: build
+$(TARGET): $(OBJECTS)
+	@echo " Linking..."
+	$(CC) $^ -o $(TARGET) $(LIB)
 
-$(TARGET): $(OBJS)
-	$(CC) $^ $(LIBS) -o $@
-
-%.o: %.c
-	$(CC) $(CFLAGS) $<
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
+	@echo " Compiling..."
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	@echo " Cleaning..."
+	$(RM) $(BUILDDIR)/* $(TARGET)
 
-build: $(TARGET)
+tests:
+	$(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
 
-rebuild: clean build
+info:
+	@echo $(PROJECT)
+
+.PHONY: clean test info
