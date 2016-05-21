@@ -26,7 +26,7 @@ data corruption.
 ### Installation
 
 ```sh
-$ git clone <git-repo-url>
+$ git clone git@github.com:jcasse/data-integrity-tester.git
 $ cd data-integrity-tester
 $ make
 ```
