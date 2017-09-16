@@ -64,7 +64,7 @@ datint -z 1024 /dev/sda3
 License
 ----
 
-[//]: # (A short snippet describing the license (MIT, Apache, etc.))
+[//]: # "A short snippet describing the license (MIT, Apache, etc.)"
 
 [//]: # (http://choosealicense.com/)
 
